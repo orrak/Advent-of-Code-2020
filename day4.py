@@ -27,8 +27,8 @@ with open("day4input.txt", "r") as f:
                iyr = 2010 <= int(p['iyr']) <= 2020
                eyr = 2020 <= int(p['eyr']) <= 2030
                ecl = p['ecl'] in ecllst
-               hcl = re.match(r'#([0-9]|[a-f]){6}', p['hcl']) != None
-               pid = re.match(r'[0-9]{9}', p['pid']) != None
+               hcl = re.match(r'^#([0-9]|[a-f]){6}$', p['hcl']) != None
+               pid = re.match(r'^[0-9]{9}$', p['pid']) != None
 
                hgtunit = p['hgt'][-2:]
                hgtnum = p['hgt'][:-2]
