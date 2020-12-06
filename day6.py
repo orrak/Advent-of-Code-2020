@@ -1,29 +1,16 @@
 with open("day6input.txt", "r") as f:
-    txt = f.read()
-    txt = txt.split("\n\n")
+    txt = f.read().split("\n\n")
     sumcount = 0
     allcount = 0
-    c = 0
+
     for group in txt:
-        people = group.strip().replace("\n", "")
-        lst = []
-        lst[:0] = people
-        sumcount += len(list(set(lst)))
+        sumcount += len(list(set([char for char in group.strip().replace("\n", "")])))
 
         people = group.strip().split("\n")
-
-        lists = []
+        intersection = people[0]
         for person in people:
-            lst = []
-            lst[:0] = person
-            lists.append(list(set(lst)))
-
-        intersection = lists[0]
-        for i in range(len(lists)):
-            intersection = list(set(intersection).intersection(lists[i]))
-
+            intersection = list(set(intersection).intersection(person))
         allcount += len(intersection)
-
 
     print('part one', sumcount)
     print('part two', allcount)
