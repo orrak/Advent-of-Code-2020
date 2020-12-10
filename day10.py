@@ -62,8 +62,3 @@ with open("day10input.txt", "r") as f:
     # since the empty set is not an option.
     # for all other removables we have 2 options
     print('part two: %d' % (2**len(removeable)*7**c))
-
-    # if there were such groups of other lengths we get (2**n)-1 options for a group of length n
-
-    # general: (2**independent_removables)*((2**n1)-1)*...*((2**nk)-1),
-    # where n1...nk are lengths of removable groups
