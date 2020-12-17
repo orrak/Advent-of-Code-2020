@@ -14,24 +14,23 @@ with open("day16input.txt", "r") as f:
         ranges.append([int(lst[2]), int(lst[3])])
 
     valid = []
-    invalidvalues = []
+    invalidsum = 0
     for t in other[1:]:
         t = [int(e) for e in re.split(',', t)]
         v = True
         for num in t:
             if not np.any(np.array([num in range(r[0], r[1]+1) for r in ranges])):
                 v = False
-                invalidvalues.append(num)
+                invalidsum += num
                 break
         if v:
             valid.append(t)
 
-    print('part one: %d' % sum(invalidvalues))
+    print('part one: %d' % invalidsum)
 
     allposs = {}
     for i in range(len(mine)):
         lst = [t[i] for t in valid]
-
         poss = []
         for j in range(0, len(ranges)-1, 2):
             a = ranges[j]
@@ -49,10 +48,5 @@ with open("day16input.txt", "r") as f:
                     if n in allposs[k2] and len(allposs[k2]) > 1:
                         allposs[k2].remove(n)
 
-    m = 1
-    for k in allposs.keys():
-        i = allposs[k][0]//2
-        if 'departure' in rules[i]:
-            m *= mine[k]
-
-    print('part two: %d' % m)
+    print('part two: %d' % np.prod([mine[k] for k in allposs.keys() 
+        if 'departure' in rules[(allposs[k][0]//2)]]))
